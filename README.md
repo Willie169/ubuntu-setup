@@ -106,30 +106,30 @@ Note that the computer will reboot multiple times duing the process, so do not d
 <pre><code>cd ~
 sudo apt update
 sudo apt install git -y
-git clone https://github.com/Willie169/ubuntu-setup-with-vnc-and-gpu.git
+git clone https://github.com/Willie169/ubuntu-setup.git
 </code></pre></li>
 <li>If you are using an NVIDIA GPU, run:
-<pre><code>cd ~/ubuntu-setup-with-vnc-and-gpu
+<pre><code>cd ~/ubuntu-setup
 ./purge-nvidia.sh
 ./nvidia.sh
 </code></pre></li>
 <li>Run:
-<pre><code>cd ~/ubuntu-setup-with-vnc-and-gpu
+<pre><code>cd ~/ubuntu-setup
 ./install-drivers.sh
 </code></pre>
 and wait for the computer to reboot automatically.</li>
 <li>Run:
-<pre><code>cd ~/ubuntu-setup-with-vnc-and-gpu
+<pre><code>cd ~/ubuntu-setup
 ./install-tools-first.sh
 </code></pre>
 and follow the prompts until the computer reboots automatically.</li>
 <li>Run:
-<pre><code>cd ~/ubuntu-setup-with-vnc-and-gpu
+<pre><code>cd ~/ubuntu-setup
 ./install-tools-second.sh
 </code></pre>
 and wait for the shell to exit automatically. It may prompt you to choose password for a new keying called "Default keyring". Set a password for it. It will also be used in other apps with <code>gnome-keyring</code> such as Ente Auth.</li></li>
 <li>Remove the repository:
-<pre><code>rm -r ~/ubuntu-setup-with-vnc-and-gpu
+<pre><code>rm -r ~/ubuntu-setup
 </code></pre></li>
 </ol>
 

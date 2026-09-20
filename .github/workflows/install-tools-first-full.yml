@@ -81,8 +81,8 @@ jobs:
           sudo DEBIAN_FRONTEND=noninteractive apt install git -y -o Dpkg::Options::="--force-confnew"
           sudo apt clean
           SECONDDF=$(df --output=used / | tail -n1)
-          git clone https://github.com/Willie169/ubuntu-setup-with-vnc-and-gpu.git
-          cd ubuntu-setup-with-vnc-and-gpu
+          git clone https://github.com/Willie169/ubuntu-setup.git
+          cd ubuntu-setup
           ./install-tools-first.sh --full
           echo "FIRSTDF: $FIRSTDF"
           echo "SECONDDF: $SECONDDF"
