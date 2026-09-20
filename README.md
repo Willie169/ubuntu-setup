@@ -1,4 +1,4 @@
-# ubuntu-setup-with-vnc-and-gpu
+# ubuntu-setup
 
 Scripts and instructions for setting up Ubuntu derivatives on AMD64 with tools for development, productivity, graphics, remote control, multimedia, communication, and more.
 
