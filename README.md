@@ -7,7 +7,7 @@ Scripts and instructions for setting up Ubuntu derivatives on AMD64 with tools f
 ### Prerequisites
 
 * Sufficient storage: (calculated using GitHub Action)
-  * [`install-tools-first.sh`](install-tools-first.sh): approximately 55.42 GB.
+  * [`install-tools-first.sh`](install-tools-first.sh): approximately 54.69 GB.
   * [`install-tools-second.sh`](install-tools-second.sh): approximately 11.60 GB.
 * Stable internet connection.
 * In power management settings, disable suspension when inactive.
