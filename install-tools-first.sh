@@ -402,7 +402,7 @@ if [ "$TEST" -eq 0 ]; then
 else
   sudo DEBIAN_FRONTEND=noninteractive apt install $PKG -y -s -o Dpkg::Options::="--force-confnew" -o Dpkg::Options::="--force-overwrite"
 fi
-PKG='apparmor-utils aria2 bridge-utils clang-uml clinfo crawl-tiles dialog dnscrypt-proxy fcitx5 fcitx5-configtool fcitx5-frontend-all fcitx5-rime filelight flatpak freerdp3-x11 fwupd gtkwave kate krita language-pack-gnome-en libfuse2t64 libreoffice libvirt-clients libvirt-daemon-system lxc lxc-templates ntfs-3g obs-studio opencc ovmf pipewire pipewire-audio-client-libraries qalculate-gtk qbittorrent qemu-system-gui qemu-system-x86 qemu-user qemu-user-binfmt qemu-utils qtspeech5-speechd-plugin quickemu remmina remmina-plugin-rdp remmina-plugin-secret snapd spice-vdagent swtpm swtpm-tools testdisk torbrowser-launcher ufw uidmap unattended-upgrades virt-manager virt-viewer wireplumber wl-clipboard xclip'
+PKG='apparmor-utils aria2 bridge-utils clang-uml clinfo cpu-checker crawl-tiles dialog dnscrypt-proxy fcitx5 fcitx5-configtool fcitx5-frontend-all fcitx5-rime filelight flatpak freerdp3-x11 fwupd gtkwave kate krita language-pack-gnome-en libfuse2t64 libreoffice libvirt-clients libvirt-daemon-system lxc lxc-templates ntfs-3g obs-studio opencc ovmf pipewire pipewire-audio-client-libraries qalculate-gtk qbittorrent qemu-system-gui qemu-system-x86 qemu-user qemu-user-binfmt qemu-utils qtspeech5-speechd-plugin quickemu remmina remmina-plugin-rdp remmina-plugin-secret snapd spice-vdagent swtpm swtpm-tools testdisk torbrowser-launcher ufw uidmap unattended-upgrades virt-manager virt-viewer wireplumber wl-clipboard xclip'
 # shellcheck disable=2086
 if [ "$TEST" -eq 0 ]; then
   sudo DEBIAN_FRONTEND=noninteractive apt install $PKG -y -o Dpkg::Options::="--force-confnew" -o Dpkg::Options::="--force-overwrite"
@@ -1595,15 +1595,18 @@ EOF
 sudo ufw allow in on incusbr0
 sudo ufw route allow in on incusbr0
 sudo ufw route allow out on incusbr0
+# shellcheck disable=2031
 curl --retry 100 --retry-connrefused --retry-delay 5 -fsSL "https://pkgs.tailscale.com/stable/ubuntu/$UBUNTU_CODENAME.noarmor.gpg" | sudo tee /usr/share/keyrings/tailscale-archive-keyring.gpg >/dev/null
+# shellcheck disable=2031
 curl --retry 100 --retry-connrefused --retry-delay 5 -fsSL "https://pkgs.tailscale.com/stable/ubuntu/$UBUNTU_CODENAME.tailscale-keyring.list" | sudo tee /etc/apt/sources.list.d/tailscale.list >/dev/null
 sudo apt update
 sudo DEBIAN_FRONTEND=noninteractive apt install tailscale -y -o Dpkg::Options::="--force-confnew" -o Dpkg::Options::="--force-overwrite"
 sudo systemctl daemon-reload
 sudo systemctl enable tailscaled
 wget --tries=100 --retry-connrefused --waitretry=5 -O- https://deb.torproject.org/torproject.org/A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89.asc | gpg --dearmor | sudo tee /usr/share/keyrings/deb.torproject.org-keyring.gpg >/dev/null
+# shellcheck disable=2031
 sudo tee /etc/apt/sources.list.d/tor.list >/dev/null <<EOF
-deb [arch=amd64 signed-by=/usr/share/keyrings/deb.torproject.org-keyring.gpg] https://deb.torproject.org/torproject.org $UBUNTU_CODENAME main
+deb [arch=amd64 signed-by=/usr/share/keyrings/deb.torproject.org-keyring.gpg] https://deb.torproject.org/torproject.org $UBUNTU_CODENAME mai
 deb-src [arch=amd64 signed-by=/usr/share/keyrings/deb.torproject.org-keyring.gpg] https://deb.torproject.org/torproject.org $UBUNTU_CODENAME main
 EOF
 sudo apt update
