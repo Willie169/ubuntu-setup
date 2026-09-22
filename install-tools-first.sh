@@ -1529,6 +1529,7 @@ curl -fsSL https://raw.githubusercontent.com/Willie169/vim-config/refs/heads/mai
 curl -fsSL https://raw.githubusercontent.com/Willie169/nvim-config/refs/heads/main/full-install.sh | bash
 nvim --headless "+Lazy! install" +qa
 curl --retry 100 --retry-connrefused --retry-delay 5 -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo tee /etc/apt/trusted.gpg.d/docker.asc >/dev/null
+# shellcheck disable=2031
 echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu $UBUNTU_CODENAME stable" | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 sudo apt update
 sudo DEBIAN_FRONTEND=noninteractive apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y -o Dpkg::Options::="--force-confnew" -o Dpkg::Options::="--force-overwrite"
@@ -1690,6 +1691,8 @@ HOST_PORT_GARAGE_S3=3900
 EOF
 curl -fsSL https://raw.githubusercontent.com/TypeType-Video/TypeType/main/scripts/install-stack.sh | bash -s -- --yes --download-only
 cd ~/typetype-stack || exit
+sed -Ei 's/^([[:space:]]*-[[:space:]]*)([A-Za-z0-9_.-]+):(\/[^[:space:]]*)$/\1.\/\2:\3/g' docker-compose.yml
+sed -Ezi 's/\nvolumes:(\n  [A-Za-z0-9_.-]+:)*//' docker-compose.yml
 sudo docker compose -f docker-compose.yml pull
 cd ~ || exit
 sudo tee /etc/systemd/system/typetype.service >/dev/null <<EOF
