@@ -29,10 +29,11 @@ services:
       - 3389:3389/udp
     volumes:
       - ./windows:/storage
+      - ./shared:/shared
     restart: always
     stop_grace_period: 2m
 EOF
-sudo docker compose pull
+docker compose up -d
 mkdir -p ~/.config/winapps
 cd ~/.config/winapps || exit
 cat >winapps.conf <<'EOF'
@@ -90,3 +91,4 @@ APP_SCAN_TIMEOUT="60"
 BOOT_TIMEOUT="120"
 HIDEF="on"
 EOF
+curl https://raw.githubusercontent.com/winapps-org/winapps/main/setup.sh | bash -s -- --user
