@@ -126,6 +126,7 @@ sudo add-apt-repository restricted -y
 sudo add-apt-repository ppa:bkryza/clang-uml -y
 sudo add-apt-repository ppa:flexiondotorg/quickemu -y
 sudo add-apt-repository ppa:git-core/ppa -y
+sudo add-apt-repository ppa:i2p-maintainers/i2p -y
 sudo add-apt-repository ppa:libreoffice/ppa -y
 sudo add-apt-repository ppa:longsleep/golang-backports -y
 sudo add-apt-repository ppa:obsproject/obs-studio -y
@@ -402,7 +403,7 @@ if [ "$TEST" -eq 0 ]; then
 else
   sudo DEBIAN_FRONTEND=noninteractive apt install $PKG -y -s -o Dpkg::Options::="--force-confnew" -o Dpkg::Options::="--force-overwrite"
 fi
-PKG='apparmor-utils aria2 bridge-utils clang-uml clinfo cpu-checker crawl-tiles dialog dnscrypt-proxy fcitx5 fcitx5-configtool fcitx5-frontend-all fcitx5-rime filelight flatpak freerdp3-x11 fwupd gtkwave kate krita language-pack-gnome-en libfuse2t64 libreoffice libvirt-clients libvirt-daemon-system lxc lxc-templates ntfs-3g obs-studio opencc ovmf pipewire pipewire-audio-client-libraries qalculate-gtk qbittorrent qemu-system-gui qemu-system-x86 qemu-user qemu-user-binfmt qemu-utils qtspeech5-speechd-plugin quickemu remmina remmina-plugin-rdp remmina-plugin-secret snapd spice-vdagent swtpm swtpm-tools testdisk torbrowser-launcher ufw uidmap unattended-upgrades virt-manager virt-viewer wireplumber wl-clipboard xclip'
+PKG='apparmor-utils aria2 bridge-utils clang-uml clinfo cpu-checker crawl-tiles dialog dnscrypt-proxy fcitx5 fcitx5-configtool fcitx5-frontend-all fcitx5-rime filelight flatpak freerdp3-x11 fwupd gtkwave i2p kate krita language-pack-gnome-en libfuse2t64 libreoffice libvirt-clients libvirt-daemon-system lxc lxc-templates ntfs-3g obs-studio opencc ovmf pipewire pipewire-audio-client-libraries qalculate-gtk qbittorrent qemu-system-gui qemu-system-x86 qemu-user qemu-user-binfmt qemu-utils qtspeech5-speechd-plugin quickemu remmina remmina-plugin-rdp remmina-plugin-secret snapd spice-vdagent swtpm swtpm-tools testdisk torbrowser-launcher ufw uidmap unattended-upgrades virt-manager virt-viewer wireplumber wl-clipboard xclip'
 # shellcheck disable=2086
 if [ "$TEST" -eq 0 ]; then
   sudo DEBIAN_FRONTEND=noninteractive apt install $PKG -y -o Dpkg::Options::="--force-confnew" -o Dpkg::Options::="--force-overwrite"
