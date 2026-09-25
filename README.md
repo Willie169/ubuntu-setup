@@ -874,6 +874,7 @@ After running this, go to <localhost:8006> in a browser and wait until Windows d
 ```
 curl -fsSL https://raw.githubusercontent.com/winapps-org/winapps/main/setup.sh | bash -s -- --user --setupAllOfficiallySupportedApps
 ```
+and go to <localhost:8006> in a browser and click OK.
 
 #### Access
 
@@ -884,6 +885,8 @@ You can go to <localhost:8006> in a browser or run
 xfreerdp3 /u:"Docker" /p:"admin" /v:127.0.0.1:3389 /cert:tofu
 ```
 to access the Windows system.
+
+You may need to go to <localhost:8006> in a browser and click OK when starting a new remote session.
 
 #### Add Apps
 
