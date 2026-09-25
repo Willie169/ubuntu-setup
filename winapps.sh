@@ -2,8 +2,7 @@
 
 sudo apt install -y curl dialog freerdp3-x11 git iproute2 libnotify-bin netcat-openbsd
 mkdir -p ~/.config/winapps
-cd ~/.config/winapps || exit
-cat >compose.yml <<'EOF'
+cat >~/.config/winapps/compose.yml <<'EOF'
 services:
   windows:
     image: dockurr/windows
@@ -35,7 +34,7 @@ services:
     restart: always
     stop_grace_period: 2m
 EOF
-cat >winapps.conf <<'EOF'
+cat >~/.config/winapps/winapps.conf <<'EOF'
 ##################################
 #   WINAPPS CONFIGURATION FILE   #
 ##################################
@@ -78,7 +77,10 @@ RDP_FLAGS_WINDOWS=""
 DEBUG="true"
 
 # [AUTOMATICALLY PAUSE WINDOWS]
-AUTOPAUSE="off"
+AUTOPAUSE="on"
+
+# [AUTOMATICALLY PAUSE WINDOWS TIMEOUT]
+AUTOPAUSE_TIME="300"
 
 # [FREERDP COMMAND]
 FREERDP_COMMAND=""
@@ -90,4 +92,4 @@ APP_SCAN_TIMEOUT="60"
 BOOT_TIMEOUT="120"
 HIDEF="on"
 EOF
-docker compose -f compose.yml up -d
+docker compose -f ~/.config/winapps/compose.yml up -d

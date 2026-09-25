@@ -227,14 +227,11 @@ Installs VirtualGL, TurboVNC, and XFCE desktop environment, configure TurboVNC t
 
 ### [`waydroid.sh`](waydroid.sh)
 
-Installs Waydroid. See [Waydroid](#waydroid) section for it does and what to do after running this script and more information.
+Installs Waydroid. See [Waydroid](#waydroid) section for what to do after running this script and more information.
 
 ### [`winapps.sh`](winapps.sh)
 
-Installs [dockur/windows](https://github.com/dockur/windows) with [ntdevlabs/tiny11builder](https://github.com/ntdevlabs/tiny11builder) image and [winapps-org/winapps](https://github.com/winapps-org/winapps). Docker and permission to run Docker as current user are required. After running this, go to <localhost:8006> in a browser and wait until Windows desktop shows up, and then run the following and close the original browser remote session:
-```
-curl -fsSL https://raw.githubusercontent.com/winapps-org/winapps/main/setup.sh | bash -s -- --user --setupAllOfficiallySupportedApps
-```
+Installs [dockur/windows](https://github.com/dockur/windows) with [ntdevlabs/tiny11builder](https://github.com/ntdevlabs/tiny11builder) image and [winapps-org/winapps](https://github.com/winapps-org/winapps). Docker and permission to run Docker as current user are required. See [WinApps](#winapps) section for what to do after running this script and more information.
 
 ### [`winrar.sh`](winrar.sh)
 
@@ -261,6 +258,7 @@ Installs [WinRAR](https://www.win-rar.com).
 + [Waydroid](#waydroid)
 + [Solution for Closing Lip Overrides Power Off](#solution-for-closing-lip-overrides-power-off)
 + [Bottles](#bottles)
++ [WinApps](#winapps)
 + [My Related Repositories](#my-related-repositories)
 
 ### NVIDIA GPU
@@ -865,6 +863,39 @@ export BOTTLES="$HOME/.var/app/com.usebottles.bottles/data/bottles"
 alias bottles='flatpak run com.usebottles.bottles'
 alias bottles-cli='flatpak run --command=bottles-cli com.usebottles.bottles'
 ```
+
+### WinApps
+
+#### Installation
+
+Run [`winapps.sh`](winapps.sh). After running this, go to <localhost:8006> in a browser and wait until Windows desktop shows up, and then run the following and click OK in browser <localhost:8006> session.
+```
+curl -fsSL https://raw.githubusercontent.com/winapps-org/winapps/main/setup.sh | bash -s -- --user --setupAllOfficiallySupportedApps
+```
+
+#### Access
+
+You can open Windows apps installed as Linux desktop entry with WinApps just like normal Linux apps.
+
+You can go to <localhost:8006> in a browser or run
+```
+xfreerdp3 /u:"Docker" /p:"admin" /v:127.0.0.1:3389 /cert:tofu
+```
+to access the Windows system.
+
+You may need to click OK in the original session when starting a second session.
+
+#### Add Apps
+
+1. Install your Windows app in Windows.
+2. For [Community Tested Applications](https://github.com/winapps-org/winapps#community-tested-applications) skip this step. For other apps, refer to [Adding Additional Pre-defined Applications](https://github.com/winapps-org/winapps#adding-additional-pre-defined-applications).
+3. Run:
+```
+curl -fsSL https://raw.githubusercontent.com/winapps-org/winapps/main/setup.sh | bash -s -- --user --uninstall
+curl -fsSL https://raw.githubusercontent.com/winapps-org/winapps/main/setup.sh | bash -s -- --user --setupAllOfficiallySupportedApps
+```
+
+Refer to [winapps-org/winapps] for more information.
 
 ### My Related Repositories
 
