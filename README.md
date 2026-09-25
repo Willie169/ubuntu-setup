@@ -872,9 +872,9 @@ Run [`winapps.sh`](winapps.sh). It will install [dockur/windows](https://github.
 
 After running this, go to <localhost:8006> in a browser and wait until Windows desktop shows up, and then run:
 ```
-curl -fsSL https://raw.githubusercontent.com/winapps-org/winapps/main/setup.sh | bash -s -- --user --setupAllOfficiallySupportedApps
+curl -fsSL https://raw.githubusercontent.com/winapps-org/winapps/main/setup.sh | bash -s -- --user
 ```
-and go to <localhost:8006> in a browser and click OK.
+and go to <localhost:8006> in a browser and click OK and back to the terminal and select apps you want.
 
 #### Access
 
@@ -895,8 +895,9 @@ You may need to go to <localhost:8006> in a browser and click OK when starting a
 3. Run:
 ```
 curl -fsSL https://raw.githubusercontent.com/winapps-org/winapps/main/setup.sh | bash -s -- --user --uninstall
-curl -fsSL https://raw.githubusercontent.com/winapps-org/winapps/main/setup.sh | bash -s -- --user --setupAllOfficiallySupportedApps
+curl -fsSL https://raw.githubusercontent.com/winapps-org/winapps/main/setup.sh | bash -s -- --user
 ```
+and go to <localhost:8006> in a browser and click OK if needed and back to the terminal and select apps you want.
 
 Refer to [winapps-org/winapps] for more information.
 
