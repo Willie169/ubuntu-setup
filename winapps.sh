@@ -92,4 +92,22 @@ APP_SCAN_TIMEOUT="60"
 BOOT_TIMEOUT="120"
 HIDEF="on"
 EOF
-docker compose -f ~/.config/winapps/compose.yml up -d
+mkdir -p /etc/systemd/system
+sudo tee /etc/systemd/system/windows.service >/dev/null <<EOF
+[Unit]
+Description=Windows
+Requires=docker.service
+After=docker.service
+
+[Service]
+WorkingDirectory=$HOME/.config/winapps
+ExecStart=/usr/bin/docker compose -f compose.yml up
+ExecStop=/usr/bin/docker compose -f compose.yml down
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+EOF
+sudo systemctl daemon-reload
+sudo systemctl enable --now windows

@@ -227,11 +227,11 @@ Installs VirtualGL, TurboVNC, and XFCE desktop environment, configure TurboVNC t
 
 ### [`waydroid.sh`](waydroid.sh)
 
-Installs Waydroid. See [Waydroid](#waydroid) section for what to do after running this script and more information.
+Installs Waydroid. See [Waydroid](#waydroid) section for what it does, what to do after running this script, and more information.
 
 ### [`winapps.sh`](winapps.sh)
 
-Installs [dockur/windows](https://github.com/dockur/windows) with [ntdevlabs/tiny11builder](https://github.com/ntdevlabs/tiny11builder) image and [winapps-org/winapps](https://github.com/winapps-org/winapps). Docker and permission to run Docker as current user are required. See [WinApps](#winapps) section for what to do after running this script and more information.
+Installs WinApps. See [WinApps](#winapps) section for what it does, what to do after running this script, and more information.
 
 ### [`winrar.sh`](winrar.sh)
 
@@ -868,7 +868,9 @@ alias bottles-cli='flatpak run --command=bottles-cli com.usebottles.bottles'
 
 #### Installation
 
-Run [`winapps.sh`](winapps.sh). After running this, go to <localhost:8006> in a browser and wait until Windows desktop shows up, and then run the following and click OK in browser <localhost:8006> session.
+Run [`winapps.sh`](winapps.sh). It will install [dockur/windows](https://github.com/dockur/windows) with [ntdevlabs/tiny11builder](https://github.com/ntdevlabs/tiny11builder) image, setup [winapps-org/winapps](https://github.com/winapps-org/winapps), and enable and start a systemd service `windows` to start it automatically on boot. Docker and permission to run Docker as current user are required. 
+
+After running this, go to <localhost:8006> in a browser and wait until Windows desktop shows up, and then run:
 ```
 curl -fsSL https://raw.githubusercontent.com/winapps-org/winapps/main/setup.sh | bash -s -- --user --setupAllOfficiallySupportedApps
 ```
@@ -882,8 +884,6 @@ You can go to <localhost:8006> in a browser or run
 xfreerdp3 /u:"Docker" /p:"admin" /v:127.0.0.1:3389 /cert:tofu
 ```
 to access the Windows system.
-
-You may need to click OK in the original session when starting a second session.
 
 #### Add Apps
 
