@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+sudo apt install -y curl dialog freerdp3-x11 git iproute2 libnotify-bin netcat-openbsd
 mkdir -p ~/.config/winapps
 cd ~/.config/winapps || exit
 cat >winapps.conf <<'EOF'
