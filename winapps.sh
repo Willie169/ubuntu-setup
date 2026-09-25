@@ -3,6 +3,38 @@
 sudo apt install -y curl dialog freerdp3-x11 git iproute2 libnotify-bin netcat-openbsd
 mkdir -p ~/.config/winapps
 cd ~/.config/winapps || exit
+cat >compose.yml <<'EOF'
+services:
+  windows:
+    image: dockurr/windows
+    container_name: WinApps
+    environment:
+      VERSION: "tiny11"
+      USERNAME: "Docker"
+      PASSWORD: "admin"
+      CPU_CORES: "half"
+      RAM_SIZE: "half"
+      DISK_SIZE: "32G"
+      DISK_FMT: "qcow2"
+      AUDIO: "Y"
+      BALLOONING: "Y"
+      BALLOONING_MIN_MEM:	"1G"
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    ports:
+      - 8006:8006
+      - 3389:3389/tcp
+      - 3389:3389/udp
+    volumes:
+      - ./windows:/storage
+      - ./shared:/shared
+    restart: always
+    stop_grace_period: 2m
+EOF
 cat >winapps.conf <<'EOF'
 ##################################
 #   WINAPPS CONFIGURATION FILE   #
@@ -58,4 +90,4 @@ APP_SCAN_TIMEOUT="60"
 BOOT_TIMEOUT="120"
 HIDEF="on"
 EOF
-curl https://raw.githubusercontent.com/winapps-org/winapps/main/setup.sh | bash -s -- --user
+docker compose -f compose.yml up -d

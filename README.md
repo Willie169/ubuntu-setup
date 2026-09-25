@@ -223,11 +223,18 @@ steam
 
 ### [`virtualgl-turbovnc.sh`](virtualgl-turbovnc.sh)
 
-Installs VirtualGL, TurboVNC, and XFCE desktop environment on Debian derivatives on AMD 64, configure TurboVNC to start XFCE desktop environment by default, and reboot. It is compatible with most GPU. You may want to use TigerVNC instead if your computer does not have a GPU. See [VirtualGL and TurboVNC](#virtualgl-and-turbovnc) section for more information.
+Installs VirtualGL, TurboVNC, and XFCE desktop environment, configure TurboVNC to start XFCE desktop environment by default, and reboot. It is compatible with most GPU. You may want to use TigerVNC instead if your computer does not have a GPU. See [VirtualGL and TurboVNC](#virtualgl-and-turbovnc) section for more information.
 
 ### [`waydroid.sh`](waydroid.sh)
 
-Installs Waydroid on Debian derivatives on AMD 64. See [Waydroid](#waydroid) section for it does and what to do after running this script and more information.
+Installs Waydroid. See [Waydroid](#waydroid) section for it does and what to do after running this script and more information.
+
+### [`winapps.sh`](winapps.sh)
+
+Installs [dockur/windows](https://github.com/dockur/windows) with [ntdevlabs/tiny11builder](https://github.com/ntdevlabs/tiny11builder) image and [winapps-org/winapps](https://github.com/winapps-org/winapps). Docker and permission to run Docker as current user are required. After running this, go to <localhost:8006> in a browser and wait until Windows desktop shows up, and then run the following and close the original browser remote session:
+```
+curl -fsSL https://raw.githubusercontent.com/winapps-org/winapps/main/setup.sh | bash -s -- --user --setupAllOfficiallySupportedApps
+```
 
 ### [`winrar.sh`](winrar.sh)
 
