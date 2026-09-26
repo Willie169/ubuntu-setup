@@ -1996,11 +1996,12 @@ cat >~/.config/fontconfig/conf.d/99-texlive.conf <<'EOF'
 EOF
 [ "$TEST" -eq 0 ] && fc-cache -fv
 mkdir -p ~/texmf/tex/latex
-cd ~/texmf/tex/latex
+cd ~/texmf/tex/latex || exit
 git clone https://github.com/Willie169/LaTeX-ToolKit.git
 git clone https://github.com/Willie169/physics-patch.git
 cd physics-patch || exit
 git checkout dev
+cd ~ || exit
 sudo DEBIAN_FRONTEND=noninteractive apt install -f -y -o Dpkg::Options::="--force-confnew" -o Dpkg::Options::="--force-overwrite"
 sudo DEBIAN_FRONTEND=noninteractive apt upgrade -y -o Dpkg::Options::="--force-confnew" -o Dpkg::Options::="--force-overwrite"
 sudo DEBIAN_FRONTEND=noninteractive apt autoremove --purge -y -o Dpkg::Options::="--force-confnew" -o Dpkg::Options::="--force-overwrite"
