@@ -403,7 +403,7 @@ if [ "$TEST" -eq 0 ]; then
 else
   sudo DEBIAN_FRONTEND=noninteractive apt install $PKG -y -s -o Dpkg::Options::="--force-confnew" -o Dpkg::Options::="--force-overwrite"
 fi
-PKG='apparmor-utils aria2 bridge-utils clang-uml clinfo cpu-checker crawl-tiles dialog dnscrypt-proxy fcitx5 fcitx5-configtool fcitx5-frontend-all fcitx5-rime filelight flatpak freerdp3-x11 fwupd gtkwave i2p kate krita language-pack-gnome-en libfuse2t64 libreoffice libvirt-clients libvirt-daemon-system lxc lxc-templates ntfs-3g obs-studio opencc ovmf pipewire pipewire-audio-client-libraries qalculate-gtk qbittorrent qemu-system-gui qemu-system-x86 qemu-user qemu-user-binfmt qemu-utils qtspeech5-speechd-plugin quickemu remmina remmina-plugin-rdp remmina-plugin-secret snapd spice-vdagent swtpm swtpm-tools testdisk torbrowser-launcher ufw uidmap unattended-upgrades virt-manager virt-viewer wireplumber wl-clipboard xclip'
+PKG='apparmor-utils aria2 bridge-utils clang-uml clinfo cpu-checker crawl-tiles dialog dnscrypt-proxy fcitx5 fcitx5-configtool fcitx5-frontend-all fcitx5-rime filelight flatpak freerdp3-x11 fwupd gtkwave i2p kate krita language-pack-gnome-en libfuse2t64 libreoffice libvirt-clients libvirt-daemon-system lxc lxc-templates ntfs-3g obs-studio opencc ovmf pipewire pipewire-audio-client-libraries qalculate-gtk qbittorrent qemu-system-gui qemu-system-x86 qemu-user qemu-user-binfmt qemu-utils qtspeech5-speechd-plugin quickemu remmina remmina-plugin-rdp remmina-plugin-secret snapd spice-vdagent swtpm swtpm-tools testdisk texlive-full torbrowser-launcher ufw uidmap unattended-upgrades virt-manager virt-viewer wireplumber wl-clipboard xclip'
 # shellcheck disable=2086
 if [ "$TEST" -eq 0 ]; then
   sudo DEBIAN_FRONTEND=noninteractive apt install $PKG -y -o Dpkg::Options::="--force-confnew" -o Dpkg::Options::="--force-overwrite"
@@ -1892,16 +1892,6 @@ mkdir kiwix-zims
 touch kiwix-zims/archlinux_en_all_maxi_1970-01.zim
 kiwix-zim-updater -d ~/kiwix-zims
 rm download.log
-if [ "$TEST" -eq 0 ]; then
-  wget --tries=100 --retry-connrefused --waitretry=5 --no-check-certificate https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
-  tar -xzf install-tl-unx.tar.gz
-  rm install-tl-unx.tar.gz*
-  cd install-tl-* || exit
-  sudo perl ./install-tl --no-interaction
-  cd ~ || exit
-  rm -rf install-tl-*
-  sudo /usr/local/texlive/2026/bin/x86_64-linux/tlmgr update --all --self --reinstall-forcibly-removed
-fi
 mkdir -p ~/.config/fontconfig/conf.d
 cat >~/.config/fontconfig/conf.d/00-noto.conf <<'EOF'
 <?xml version="1.0"?>
@@ -1995,13 +1985,6 @@ cat >~/.config/fontconfig/conf.d/01-replace.conf <<'EOF'
     <string>WenQuanYi Zen Hei</string>
   </edit>
 </match>
-</fontconfig>
-EOF
-cat >~/.config/fontconfig/conf.d/99-texlive.conf <<'EOF'
-<?xml version="1.0"?>
-<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-<fontconfig>
-  <dir>/usr/local/texlive/2026/texmf-dist/fonts</dir>
 </fontconfig>
 EOF
 [ "$TEST" -eq 0 ] && sudo fc-cache -fv
