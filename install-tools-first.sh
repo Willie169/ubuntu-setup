@@ -1386,7 +1386,7 @@ unzip JetBrainsMono.zip
 mv JetBrainsMonoNerdFontMono-Regular.ttf ~/.local/share/fonts/
 cd ~ || exit
 rm -rf .JetBrainsMono
-[ "$TEST" -eq 0 ] && sudo fc-cache -fv
+[ "$TEST" -eq 0 ] && fc-cache -fv
 sudo systemctl enable --now ssh
 sudo ufw --force enable
 sudo ufw allow ssh
@@ -1987,7 +1987,14 @@ cat >~/.config/fontconfig/conf.d/01-replace.conf <<'EOF'
 </match>
 </fontconfig>
 EOF
-[ "$TEST" -eq 0 ] && sudo fc-cache -fv
+cat >~/.config/fontconfig/conf.d/99-texlive.conf <<'EOF'
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+  <dir>/usr/share/texlive/texmf-dist/fonts</dir>
+</fontconfig>
+EOF
+[ "$TEST" -eq 0 ] && fc-cache -fv
 cd /usr/share || exit
 sudo git clone https://github.com/Willie169/LaTeX-ToolKit
 cd ~ || exit
