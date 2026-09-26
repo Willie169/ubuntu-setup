@@ -1995,8 +1995,6 @@ cat >~/.config/fontconfig/conf.d/99-texlive.conf <<'EOF'
 </fontconfig>
 EOF
 [ "$TEST" -eq 0 ] && fc-cache -fv
-cd /usr/share || exit
-sudo git clone https://github.com/Willie169/LaTeX-ToolKit
 cd ~ || exit
 mkdir -p texmf
 cd texmf || exit
@@ -2004,7 +2002,8 @@ mkdir -p tex
 cd tex || exit
 mkdir -p latex
 cd latex || exit
-git clone https://github.com/Willie169/physics-patch
+git clone https://github.com/Willie169/LaTeX-ToolKit.git
+git clone https://github.com/Willie169/physics-patch.git
 cd physics-patch || exit
 git checkout dev
 cd ~ || exit
