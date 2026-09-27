@@ -203,6 +203,10 @@ Installs KiCad and creates desktop entry `~/.local/share/applications/kicad.desk
 
 Refer to [NVIDIA Container Toolkit](#nvidia-container-toolkit) section.
 
+### [`openscq.sh`](openscq.sh)
+
+Installs [OpenSCQ30](https://github.com/Oppzippy/OpenSCQ30) CLI at `~/.local/bin/openscq30-cli` and GUI at `~/.local/bin/openscq30-gui`.
+
 ### [`steam.sh`](steam.sh)
 
 Installs Steam Flatpak. You need execute
