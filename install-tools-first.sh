@@ -1421,6 +1421,18 @@ sudo systemctl enable --now rustdesk
 sudo ufw allow 21118/udp
 sudo ufw allow 21118/tcp
 sudo ufw reload
+sudo DEBIAN_FRONTEND=noninteractive apt install libgtk-4-dev libheif-dev libraw-dev libavif-dev libdav1d-dev libheif-plugin-libde265 libheif-plugin-dav1d libheif-plugin-aomdec -y -o Dpkg::Options::="--force-confnew" -o Dpkg::Options::="--force-overwrite"
+mkdir tmp
+cd tmp
+gh_release -w --wget_option '--tries=100 --retry-connrefused --waitretry=5' qarmin/czkawka linux_krokiet_heif_raw_avif_all_backends_x86_64.zip
+unzip linux_krokiet_heif_raw_avif_all_backends_x86_64.zip
+mv krokiet ~/.local/bin/
+cd ..
+rm -rf tmp
+gh_release -w --wget_option '--tries=100 --retry-connrefused --waitretry=5' qarmin/czkawka linux_czkawka_cli_heif_raw_avif_x86_64
+mv linux_czkawka_cli_heif_raw_avif_x86_64 czkawka
+chmod +x czkawka
+mv czkawka ~/.local/bin/
 # shellcheck disable=2155
 export UBUNTU_VERSION_ID=$(
   if grep -q '^NAME="Linux Mint"' /etc/os-release; then
