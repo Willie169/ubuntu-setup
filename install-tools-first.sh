@@ -130,18 +130,17 @@ sudo add-apt-repository ppa:i2p-maintainers/i2p -y -n
 sudo add-apt-repository ppa:libreoffice/ppa -y -n
 sudo add-apt-repository ppa:longsleep/golang-backports -y -n
 sudo add-apt-repository ppa:obsproject/obs-studio -y -n
-sudo add-apt-repository ppa:remmina-ppa-team/remmina-next -y -n || true
+sudo add-apt-repository ppa:remmina-ppa-team/remmina-next -y -n
 sudo mv /etc/apt/sources.list.d/remmina-ppa-team-ubuntu-remmina-next-*.sources /etc/apt/sources.list.d/remmina-ppa-team-ubuntu-remmina-next-noble.sources || true
 sudo sed -i 's/^Suites: .*$/Suites: noble/' /etc/apt/sources.list.d/remmina-ppa-team-ubuntu-remmina-next-noble.sources
-sudo add-apt-repository ppa:stefanberger/swtpm-noble -y -n || true
+sudo add-apt-repository ppa:stefanberger/swtpm-noble -y -n
 sudo mv /etc/apt/sources.list.d/stefanberger-ubuntu-swtpm-noble-*.sources /etc/apt/sources.list.d/stefanberger-ubuntu-swtpm-noble-noble.sources || true
 sudo sed -i 's/^Suites: .*$/Suites: noble/' /etc/apt/sources.list.d/stefanberger-ubuntu-swtpm-noble-noble.sources
 echo 'Package: *
 Pin: release o=LP-PPA-stefanberger-swtpm-noble
 Pin-Priority: 1001' | sudo tee /etc/apt/preferences.d/swtpm >/dev/null
-sudo add-apt-repository ppa:zhangsongcui3371/fastfetch -y -n || true
-f=/etc/apt/sources.list.d/ubuntu.sources
-sudo sed -i 's/^Types: *deb.*/Types: deb deb-src/' "$f"
+sudo add-apt-repository ppa:zhangsongcui3371/fastfetch -y -n
+sudo sed -i 's/^Types: *deb.*/Types: deb deb-src/' /etc/apt/sources.list.d/ubuntu.sources || true
 [[ $(echo "$VERSION_ID" | cut -d. -f1) -lt 26 ]] && sudo add-apt-repository ppa:keyd-team/ppa -y -n
 sudo apt update
 sudo DEBIAN_FRONTEND=noninteractive apt purge fcitx* neovim rustup tree-sitter-cli yq -y -o Dpkg::Options::="--force-confnew" -o Dpkg::Options::="--force-overwrite"
