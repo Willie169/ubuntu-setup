@@ -140,13 +140,8 @@ echo 'Package: *
 Pin: release o=LP-PPA-stefanberger-swtpm-noble
 Pin-Priority: 1001' | sudo tee /etc/apt/preferences.d/swtpm >/dev/null
 sudo add-apt-repository ppa:zhangsongcui3371/fastfetch -y -n || true
-bash <<'EOF'
-set -e
 f=/etc/apt/sources.list.d/ubuntu.sources
-if [ -f "$f" ] && grep -q "^Types:.*deb" "$f"; then
-  sudo sed -i 's/^Types: *deb.*/Types: deb deb-src/' "$f"
-fi
-EOF
+sudo sed -i 's/^Types: *deb.*/Types: deb deb-src/' "$f"
 [[ $(echo "$VERSION_ID" | cut -d. -f1) -lt 26 ]] && sudo add-apt-repository ppa:keyd-team/ppa -y -n
 sudo apt update
 sudo DEBIAN_FRONTEND=noninteractive apt purge fcitx* neovim rustup tree-sitter-cli yq -y -o Dpkg::Options::="--force-confnew" -o Dpkg::Options::="--force-overwrite"
