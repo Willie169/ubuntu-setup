@@ -120,26 +120,26 @@ sudo apt update
 # shellcheck disable=2155
 VERSION_ID=$(if grep -q '^NAME="Linux Mint"' /etc/os-release; then inxi -Sx | awk -F': ' '/base/{print $2}' | awk '{print $2}'; else . /etc/os-release && echo "$VERSION_ID"; fi)
 sudo DEBIAN_FRONTEND=noninteractive apt install software-properties-common -y -o Dpkg::Options::="--force-confnew" -o Dpkg::Options::="--force-overwrite"
-sudo add-apt-repository universe -y
-sudo add-apt-repository multiverse -y
-sudo add-apt-repository restricted -y
-sudo add-apt-repository ppa:bkryza/clang-uml -y
-sudo add-apt-repository ppa:flexiondotorg/quickemu -y
-sudo add-apt-repository ppa:git-core/ppa -y
-sudo add-apt-repository ppa:i2p-maintainers/i2p -y
-sudo add-apt-repository ppa:libreoffice/ppa -y
-sudo add-apt-repository ppa:longsleep/golang-backports -y
-sudo add-apt-repository ppa:obsproject/obs-studio -y
-sudo add-apt-repository ppa:remmina-ppa-team/remmina-next -y || true
+sudo add-apt-repository universe -y -n
+sudo add-apt-repository multiverse -y -n
+sudo add-apt-repository restricted -y -n
+sudo add-apt-repository ppa:bkryza/clang-uml -y -n
+sudo add-apt-repository ppa:flexiondotorg/quickemu -y -n
+sudo add-apt-repository ppa:git-core/ppa -y -n
+sudo add-apt-repository ppa:i2p-maintainers/i2p -y -n
+sudo add-apt-repository ppa:libreoffice/ppa -y -n
+sudo add-apt-repository ppa:longsleep/golang-backports -y -n
+sudo add-apt-repository ppa:obsproject/obs-studio -y -n
+sudo add-apt-repository ppa:remmina-ppa-team/remmina-next -y -n || true
 sudo mv /etc/apt/sources.list.d/remmina-ppa-team-ubuntu-remmina-next-*.sources /etc/apt/sources.list.d/remmina-ppa-team-ubuntu-remmina-next-noble.sources || true
 sudo sed -i 's/^Suites: .*$/Suites: noble/' /etc/apt/sources.list.d/remmina-ppa-team-ubuntu-remmina-next-noble.sources
-sudo add-apt-repository ppa:stefanberger/swtpm-noble -y || true
+sudo add-apt-repository ppa:stefanberger/swtpm-noble -y -n || true
 sudo mv /etc/apt/sources.list.d/stefanberger-ubuntu-swtpm-noble-*.sources /etc/apt/sources.list.d/stefanberger-ubuntu-swtpm-noble-noble.sources || true
 sudo sed -i 's/^Suites: .*$/Suites: noble/' /etc/apt/sources.list.d/stefanberger-ubuntu-swtpm-noble-noble.sources
 echo 'Package: *
 Pin: release o=LP-PPA-stefanberger-swtpm-noble
 Pin-Priority: 1001' | sudo tee /etc/apt/preferences.d/swtpm >/dev/null
-sudo add-apt-repository ppa:zhangsongcui3371/fastfetch -y || true
+sudo add-apt-repository ppa:zhangsongcui3371/fastfetch -y -n || true
 bash <<'EOF'
 set -e
 f=/etc/apt/sources.list.d/ubuntu.sources
@@ -147,7 +147,7 @@ if [ -f "$f" ] && grep -q "^Types:.*deb" "$f"; then
   sudo sed -i 's/^Types: *deb.*/Types: deb deb-src/' "$f"
 fi
 EOF
-[[ $(echo "$VERSION_ID" | cut -d. -f1) -lt 26 ]] && sudo add-apt-repository ppa:keyd-team/ppa -y
+[[ $(echo "$VERSION_ID" | cut -d. -f1) -lt 26 ]] && sudo add-apt-repository ppa:keyd-team/ppa -y -n
 sudo apt update
 sudo DEBIAN_FRONTEND=noninteractive apt purge fcitx* neovim rustup tree-sitter-cli yq -y -o Dpkg::Options::="--force-confnew" -o Dpkg::Options::="--force-overwrite"
 sudo DEBIAN_FRONTEND=noninteractive apt install apt-transport-https bash build-essential ca-certificates coreutils cmake curl dbus openjdk-21-jdk g++ gcc git gnupg grep gzip jq locales lsb-release make ninja-build openssh-server perl perl-tk python-is-python3 python3 vim-gtk3 wget xz-utils -y -o Dpkg::Options::="--force-confnew" -o Dpkg::Options::="--force-overwrite"
