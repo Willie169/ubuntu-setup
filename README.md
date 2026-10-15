@@ -482,7 +482,7 @@ See my [**Android-Non-Root**](https://github.com/Willie169/Android-Non-Root) rep
 
 #### Support
 
-Windows, Linux, macOS, Android, iOS, and Web are supported. For Linux, both X11 and Wayland are supported. For Wayland,
+Windows, Linux, macOS, Android, iOS, and Web are supported. For Linux, both X11 and Wayland are supported. For Wayland, you need to select Wayland screen selection at the first time, and
 
 > The new RustDesk Wayland preview for x86_64 Debian/Ubuntu-based systems adds true unattended access on Wayland: after the initial setup, no one at the remote machine has to approve each session. Multi-monitor setups work in unattended sessions as well.
 
