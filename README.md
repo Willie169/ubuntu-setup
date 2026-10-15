@@ -482,15 +482,19 @@ See my [**Android-Non-Root**](https://github.com/Willie169/Android-Non-Root) rep
 
 #### Support
 
-Windows, Linux, macOS, Android, iOS, and Web are supported. For Linux, both X11 and Wayland are supported. For Wayland, you need to select Wayland screen selection at the first time.
+Windows, Linux, macOS, Android, iOS, and Web are supported. For Linux, both X11 and Wayland are supported. For Wayland,
+
+> The new RustDesk Wayland preview for x86_64 Debian/Ubuntu-based systems adds true unattended access on Wayland: after the initial setup, no one at the remote machine has to approve each session. Multi-monitor setups work in unattended sessions as well.
+
+Refer to [RustDesk Wayland Preview: Unattended and Login-Screen Access](https://rustdesk.com/blog/unattended-remote-access-wayland) and [RustDesk for Linux: The Open-Source Remote Desktop](https://rustdesk.com/blog/rustdesk-for-linux)  for more information.
 
 #### Installation
 
-Download the `rustdesk-*-x86_64.deb` from the latest release in [rustdesk GitHub releases](https://github.com/rustdesk/rustdesk/releases) and
+Download `rustdesk-*-x86_64.deb` (with `unattended-wayland` for unattended Wayland preview build and without for standard build) from the latest release in [rustdesk GitHub releases](https://github.com/rustdesk/rustdesk/releases) and
 ```
 sudo apt install ./rustdesk-*-x86_64.deb -y
 ```
-This has been done in [`install-tools-first.sh`](install-tools-first.sh) and can be updated with `update_tools` function defined in `~/.bashrc` in [`install-tools-first.sh`](install-tools-first.sh).
+This has been done in [`install-tools-first.sh`](install-tools-first.sh) (`unattended-wayland` build) and can be updated with `update_tools` function defined in `~/.bashrc` in [`install-tools-first.sh`](install-tools-first.sh).
 
 #### Android
 

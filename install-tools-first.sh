@@ -1405,9 +1405,9 @@ if [ "$TEST" -eq 0 ]; then
 else
   sudo DEBIAN_FRONTEND=noninteractive apt install onlyoffice-desktopeditors -y -s -o Dpkg::Options::="--force-confnew" -o Dpkg::Options::="--force-overwrite"
 fi
-gh_release -w --wget_option '--tries=100 --retry-connrefused --waitretry=5' rustdesk/rustdesk 'rustdesk-*-x86_64.deb'
-sudo DEBIAN_FRONTEND=noninteractive apt install ./rustdesk-*-x86_64.deb -y -o Dpkg::Options::="--force-confnew" -o Dpkg::Options::="--force-overwrite"
-rm rustdesk-*-x86_64.deb*
+gh_release -w --wget_option '--tries=100 --retry-connrefused --waitretry=5' rustdesk/rustdesk 'rustdesk-unattended-wayland-*-x86_64.deb'
+sudo DEBIAN_FRONTEND=noninteractive apt install ./rustdesk-unattended-wayland-*-x86_64.deb -y -o Dpkg::Options::="--force-confnew" -o Dpkg::Options::="--force-overwrite"
+rm rustdesk-unattended-wayland-*-x86_64.deb*
 sudo systemctl enable --now rustdesk
 sudo ufw allow 21118/udp
 sudo ufw allow 21118/tcp
