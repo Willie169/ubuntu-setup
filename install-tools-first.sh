@@ -130,16 +130,16 @@ sudo add-apt-repository ppa:i2p-maintainers/i2p -y
 sudo add-apt-repository ppa:libreoffice/ppa -y
 sudo add-apt-repository ppa:longsleep/golang-backports -y
 sudo add-apt-repository ppa:obsproject/obs-studio -y
-sudo add-apt-repository ppa:remmina-ppa-team/remmina-next -y
+sudo add-apt-repository ppa:remmina-ppa-team/remmina-next -y || true
 sudo mv /etc/apt/sources.list.d/remmina-ppa-team-ubuntu-remmina-next-*.sources /etc/apt/sources.list.d/remmina-ppa-team-ubuntu-remmina-next-noble.sources || true
 sudo sed -i 's/^Suites: .*$/Suites: noble/' /etc/apt/sources.list.d/remmina-ppa-team-ubuntu-remmina-next-noble.sources
-sudo add-apt-repository ppa:stefanberger/swtpm-noble -y
+sudo add-apt-repository ppa:stefanberger/swtpm-noble -y || true
 sudo mv /etc/apt/sources.list.d/stefanberger-ubuntu-swtpm-noble-*.sources /etc/apt/sources.list.d/stefanberger-ubuntu-swtpm-noble-noble.sources || true
 sudo sed -i 's/^Suites: .*$/Suites: noble/' /etc/apt/sources.list.d/stefanberger-ubuntu-swtpm-noble-noble.sources
 echo 'Package: *
 Pin: release o=LP-PPA-stefanberger-swtpm-noble
 Pin-Priority: 1001' | sudo tee /etc/apt/preferences.d/swtpm >/dev/null
-sudo add-apt-repository ppa:zhangsongcui3371/fastfetch -y
+sudo add-apt-repository ppa:zhangsongcui3371/fastfetch -y || true
 bash <<'EOF'
 set -e
 f=/etc/apt/sources.list.d/ubuntu.sources
