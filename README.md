@@ -13,89 +13,12 @@ Scripts and instructions for setting up Ubuntu derivatives on AMD64 with tools f
 * In power management settings, disable suspension when inactive.
 * Ubuntu 24.04 or 26.04. It may and may not work for other Ubuntu versions and derivatives.
 
-### USB Flashing and Dual Boot
+Some troubleshooting and setup you may want to apply beforehand:
 
-Refer to my [**dual-boot-windows-linux-and-recovery**](https://github.com/Willie169/dual-boot-windows-linux-and-recovery) repo.
-
-### WPA PEAP TLS Network
-
-If you fail to connect to a WPA PEAP Network that you are supposed to be able to connect to, it may be due to deprecated TLS protocols and can be fixed by according to my [**WPA-PEAP-TLS-network-Linux**](https://github.com/Willie169/WPA-PEAP-TLS-network-Linux) repo.
-
-### Btrfs
-
-If you are using Btrfs, you may want to set it up first. Refer to my [**btrfs-debian-ubuntu**](https://github.com/Willie169/btrfs-debian-ubuntu) repo.
-
-### SSH
-
-SSH provides a secure way for accessing remote hosts and replaces tools such as telnet, rlogin, rsh, ftp. OpenSSH, also known as OpenBSD Secure Shell, is a suite of secure networking utilities based on the Secure Shell (SSH) protocol, which provides a secure channel over an unsecured network in a client–server architecture.
-
-To install and enable SSH server on your computer, run:
-```
-sudo apt update
-sudo apt install openssh-server -y
-sudo systemctl enable --now ssh
-```
-If UFW is enabled, allow SSH:
-```
-sudo ufw allow ssh
-```
-Check IP by running:
-```
-sudo apt install net-tools -y
-ifconfig
-```
-Password authentication is typically allowed by default. If not and you haven't setup public key authentication, run
-```
-sudo sed -Ei 's/^#?PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config
-sudo systemctl restart sshd
-```
-For better security, using public key authentication is recommended. First generate a key pair in client and optionally set a passphrase. Press Enter to accept default path `~/.ssh/id_ed25519`. `~/.ssh/id_ed25519` is your private key. Keep it secure. Skip if you already has one.
-```
-ssh-keygen -t ed25519 -a 100
-```
-And then, copy the public key to the server. Replace `user@server` with your actual server.
-```
-ssh-copy-id -i ~/.ssh/id_ed25519.pub user@server
-```
-Test whether it works.
-```
-ssh -i ~/.ssh/id_ed25519 user@server
-```
-If it works, you can disable password authentication on server by running
-```
-sudo sed -Ei 's/^#?PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
-sudo systemctl restart ssh
-```
-If your SSH connection is unstable. You may try adding keepalive packets sending on client by running:
-```
-cat >> ~/.ssh/config <<EOF
-Host *
-    ServerAliveInterval 15
-    ServerAliveCountMax 8
-EOF
-```
-and reconnect.
-
-You can use Android as SSH client. [**Termux**](https://f-droid.org/packages/com.termux) is suggested if you do not have a client of your choice. See my [**Android-Non-Root**](https://github.com/Willie169/Android-Non-Root) and [**termux-ssh**](https://github.com/Willie169/termux-sh) repos for more information.
-
-You can adjust more SSH server config by editing `/etc/ssh/sshd_config`:
-```
-sudo vim /etc/ssh/sshd_config
-```
-Some configs include:
-
-<ul>
-<li>SSH Port:<pre><code>#Port 22
-</code></pre>default to port <code>22</code>.</li>
-<li>Ports Listening to<pre><code>#AddressFamily any
-#ListenAddress 0.0.0.0
-#ListenAddress ::
-</code></pre></li>
-<li>Password authentication:<pre><code>#PasswordAuthentication yes
-</code></pre></li>
-<li>Public key authentication:<pre><code>#PubkeyAuthentication yes
-</code></pre></li>
-</ul>
+- USB Flashing and Dual Boot: Refer to my [**dual-boot-windows-linux-and-recovery**](https://github.com/Willie169/dual-boot-windows-linux-and-recovery) repo.
+- WPA PEAP TLS Network: If you fail to connect to a WPA PEAP Network that you are supposed to be able to connect to, it may be due to deprecated TLS protocols and can be fixed by according to my [**WPA-PEAP-TLS-network-Linux**](https://github.com/Willie169/WPA-PEAP-TLS-network-Linux) repo.
+- Btrfs: If you are using Btrfs, you may want to set it up first. Refer to my [**btrfs-debian-ubuntu**](https://github.com/Willie169/btrfs-debian-ubuntu) repo.
+- SSH: If you want to connect through SSH, refer to [OpenSSH](#openssh) section.
 
 ### Usage
 
@@ -251,6 +174,7 @@ Installs [WinRAR](https://www.win-rar.com).
 
 ### Table of Contents
 
++ [OpenSSH](#openssh)
 + [NVIDIA GPU](#nvidia-gpu)
 + [Wayland](#wayland)
 + [Linux Mint Ubuntu Version Tweak](#linux-mint-ubuntu-version-tweak)
@@ -264,6 +188,110 @@ Installs [WinRAR](https://www.win-rar.com).
 + [Bottles](#bottles)
 + [WinApps](#winapps)
 + [My Related Repositories](#my-related-repositories)
+
+### OpenSSH
+
+#### Introduction
+
+SSH provides a secure way for accessing remote hosts and replaces tools such as telnet, rlogin, rsh, ftp. OpenSSH, also known as OpenBSD Secure Shell, is a suite of secure networking utilities based on the Secure Shell (SSH) protocol, which provides a secure channel over an unsecured network in a client–server architecture.
+
+#### Install and Enable OpenSSH Server
+
+To install and enable OpenSSH server on your computer, run:
+```
+sudo apt update
+sudo apt install openssh-server -y
+sudo systemctl disable --now ssh.socket
+sudo systemctl enable --now ssh.service
+```
+If UFW is enabled, allow SSH:
+```
+sudo ufw allow ssh
+```
+These are done in [`install-tools-first.sh`](install-tools-first.sh).
+
+#### OpenSSH Server Configurations
+
+You can adjust OpenSSH server configurations by editing `/etc/ssh/sshd_config`:
+```
+sudo vim /etc/ssh/sshd_config
+```
+Uncomment a line and adjust its value to change a configuration. The original commented value is the default value. Run
+```
+sudo systemctl restart ssh
+```
+afterwards to apply new configurations.
+
+Server port can be configured with `Port` and defaults to port `22`.
+
+Ports which the server listens to can be configured with `AddressFamily` and `ListenAddress`. The default is listening to all ports:
+```
+#AddressFamily any
+#ListenAddress 0.0.0.0
+#ListenAddress ::
+```
+Password authentication is typically allowed by default. If not and you haven't setup public key authentication, run
+```
+sudo sed -Ei 's/^#?PasswordAuthentication.*/PasswordAuthentication yes/' /etc/ssh/sshd_config
+sudo systemctl restart ssh
+```
+For better security and convenience, using public key authentication is recommended. First generate a key pair in client and optionally set a passphrase:
+```
+ssh-keygen -t ed25519 -a 100
+```
+Press Enter to accept default path `~/.ssh/id_ed25519`. `~/.ssh/id_ed25519` is your private key, which is what authenticates your client and should be kept secure. `~/.ssh/id_ed25519.pub` is your public key, which is stored in your server to authenticate your client. You may also use your existing private and public key pair.
+
+And then, copy the public key to the server. Replace `user@server` with your actual server.
+```
+ssh-copy-id -i ~/.ssh/id_ed25519.pub user@server
+```
+Test whether it works.
+```
+ssh -i ~/.ssh/id_ed25519 user@server
+```
+If it works, you can disable password authentication on server by running
+```
+sudo sed -Ei 's/^#?PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
+sudo systemctl restart ssh
+```
+
+#### Connecting from a Client
+
+For Debian derivatives, you can typically install OpenSSH client by running:
+```
+sudo apt install openssh-client -y
+```
+Connect to OpenSSH server from an OpenSSH client by running:
+```
+ssh user@server
+```
+or specifying server port:
+```
+ssh -p port user@server
+```
+where `user` is your user name, `server` is the IP of your server, and `port` is the port of your server, which defaults to `22` if not specified.
+
+To inspect server IP, you can install net-tools:
+```
+sudo apt install net-tools -y
+```
+and inspect IP:
+```
+ifconfig
+```
+To use Tailscale, refer to [Tailscale](#tailscale) section.
+
+If your SSH connection is unstable. You may try adding keep-alive packets sending on client by running:
+```
+cat >> ~/.ssh/config <<EOF
+Host *
+    ServerAliveInterval 15
+    ServerAliveCountMax 8
+EOF
+```
+and then reconnect.
+
+You can use Android as SSH client. [**Termux**](https://f-droid.org/packages/com.termux) is suggested if you do not have a client of your choice. See my [**Android-Non-Root**](https://github.com/Willie169/Android-Non-Root) and [**termux-ssh**](https://github.com/Willie169/termux-sh) repos for more information.
 
 ### NVIDIA GPU
 
