@@ -394,7 +394,7 @@ if [ "$TEST" -eq 0 ]; then
 else
   sudo DEBIAN_FRONTEND=noninteractive apt install $PKG -y -s -o Dpkg::Options::="--force-confnew" -o Dpkg::Options::="--force-overwrite"
 fi
-PKG='apparmor-utils aria2 bridge-utils clang-uml clinfo cpu-checker crawl-tiles dialog dnscrypt-proxy fcitx5 fcitx5-configtool fcitx5-frontend-all fcitx5-rime filelight flatpak freerdp3-x11 fwupd gtkwave i2p kate language-pack-gnome-en laptop-mode-tools libfuse2t64 libreoffice libvirt-clients libvirt-daemon-system lxc lxc-templates ntfs-3g obs-studio opencc ovmf pipewire pipewire-audio-client-libraries qalculate-gtk qbittorrent qemu-system-gui qemu-system-x86 qemu-user qemu-user-binfmt qemu-utils qtspeech5-speechd-plugin quickemu remmina remmina-plugin-rdp remmina-plugin-secret snapd spice-vdagent swtpm swtpm-tools testdisk torbrowser-launcher ufw uidmap unattended-upgrades virt-manager virt-viewer wireplumber wl-clipboard xclip'
+PKG='apparmor-utils aria2 bridge-utils clang-uml clinfo cpu-checker crawl-tiles dialog dnscrypt-proxy fcitx5 fcitx5-configtool fcitx5-frontend-all fcitx5-rime filelight flatpak freerdp3-x11 fwupd gtkwave i2p kate kmahjongg kmines kpat ksudoku language-pack-gnome-en laptop-mode-tools libfuse2t64 libreoffice libvirt-clients libvirt-daemon-system lxc lxc-templates ntfs-3g obs-studio opencc ovmf pipewire pipewire-audio-client-libraries qalculate-gtk qbittorrent qemu-system-gui qemu-system-x86 qemu-user qemu-user-binfmt qemu-utils qtspeech5-speechd-plugin quickemu remmina remmina-plugin-rdp remmina-plugin-secret snapd spice-vdagent swtpm swtpm-tools testdisk torbrowser-launcher ufw uidmap unattended-upgrades virt-manager virt-viewer wireplumber wl-clipboard xclip'
 # shellcheck disable=2086
 if [ "$TEST" -eq 0 ]; then
   sudo DEBIAN_FRONTEND=noninteractive apt install $PKG -y -o Dpkg::Options::="--force-confnew" -o Dpkg::Options::="--force-overwrite"
@@ -1795,12 +1795,16 @@ cd ~ || exit
 mv ~/lizzieyzy/src/main/resources/assets/logo.png ~/.local/share/lizzieyzy/
 rm -rf ~/.m2/repository
 rm -rf ~/lizzieyzy
+cat >~/.local/bin/lizzieyly <<'EOF'
+cd $HOME/.local/share/lizzieyzy && java -jar lizzie-yzy.jar
+EOF
+chmod +x ~/.local/bin/lizzieyly
 cat >~/.local/share/applications/lizzieyzy.desktop <<EOF
 [Desktop Entry]
 Type=Application
 Name=LizzieYzy
 Comment=LizzieYzy - GUI for Game of Go
-Exec=sh -c 'cd $HOME/.local/share/lizzieyzy && java -jar lizzie-yzy.jar'
+Exec=$HOME/.local/bin/lizzieyzy
 Icon=$HOME/.local/share/lizzieyzy/logo.png
 Terminal=false
 Categories=Game;
